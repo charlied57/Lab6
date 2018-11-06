@@ -113,51 +113,88 @@ mostIsolated(vector<double> & number, int n)
 // post: The number of strings in A that do not occur in B
 //         has been returned.
 int
-unmatched(list<string> & A, list<string> & B)
+unmatched(list<string> & a, list<string> & b)
 {
-	// STUB  STUB  STUB
-	return -1;
+	int unmatchedStrings = 0;
+
+	while(true) {
+	    int count = 0;
+        while (true) {
+            string A = a.front();
+            string B = b.front();
+            if(A == ""){
+                count = -1;
+                break;
+            }
+            if(B == ""){
+                count = -2;
+                break;
+            }
+
+            if (a.front() < b.front()) {
+                a.pop_front();
+                if(count > 0){
+                    unmatchedStrings++;
+                }
+                count++;
+            }
+            else if(a.front() >= b.front()){
+                b.pop_front();
+                break;
+            }
+        }
+        if(count == -1){
+            unmatchedStrings = unmatchedStrings + a.size();
+
+
+
+            return unmatchedStrings;
+        }
+        if(count == -2){
+            return unmatchedStrings;
+        }
+    }
 }
 
 
 int
 main()
 {
-	cout << "Find the most isolated number" << endl
-		<< "-----------------------------" << endl << endl;
-	while (true)
-	{
-		cout << "Enter size for numbers: ";
-		int n = 0;
-		cin >> n;
-		if (n <= 0)
-			break;
-		cout << "Enter seed for rand: ";
-		unsigned int seed;
-		cin >> seed;
-		srand(seed);
-
-		// Construct a sorted list of numbers
-		Timer get;
-		get.start();
-		vector<double> numbers = getNums(n, -n, n);
-		get.stop();
-		cout << "Constructed in " << get() << " seconds"
-			<< endl;
-
-		if (n < 10)
-			cout << numbers << endl << endl;
-
-		// Report a most isolated isolated number
-		Timer time;
-		time.start();
-		double isolated = mostIsolated(numbers, n);
-		time.stop();
-		cout << "The most isolated number is "
-			<< isolated << endl
-			<< "calculated in " << time() << " seconds"
-			<< endl << endl;
-	}
+//	cout << "Find the most isolated number" << endl
+//		<< "-----------------------------" << endl << endl;
+//	while (true)
+//	{
+//		cout << "Enter size for numbers: ";
+//		int n = 0;
+//		cin >> n;
+//		if (n <= 0)
+//			break;
+//		cout << "Enter seed for rand: ";
+//		unsigned int seed;
+//		cin >> seed;
+//		srand(seed);
+//
+//		// Construct a sorted list of numbers
+//		Timer get;
+//		get.start();
+//		vector<double> numbers = getNums(n, -n, n);
+//		get.stop();
+//		cout << "Constructed in " << get() << " seconds"
+//			<< endl;
+//
+//		if (n < 10)
+//			cout << numbers << endl << endl;
+//
+//		// Report a most isolated isolated number
+//		Timer time;
+//		time.start();
+//		double isolated = mostIsolated(numbers, n);
+//		time.stop();
+//		cout << "The most isolated number is "
+//			<< isolated << endl
+//			<< "calculated in " << time() << " seconds"
+//			<< endl << endl;
+//	}
 
 
 
